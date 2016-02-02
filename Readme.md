@@ -91,7 +91,7 @@ query = {
 }
 ```
 
-#### Order
+### Order
 List all users sorted in the ascending order of their balance
 ```
 query = {
@@ -119,7 +119,7 @@ query = {
 }
 ```
 
-#### Sum
+### Sum
 Total of all users' balances
 ```
 query = {
@@ -138,7 +138,7 @@ res['aggregations']['total_balance']['value']
 ```
 
 
-#### Max
+### Max
 User with maxium balance
 ```
 query = {
@@ -211,4 +211,53 @@ query = {
   }
 }
 ```
+
+Order the states based on their maxium user balance available.
+```
+query = {
+  query: {
+    match_all: {}
+  },
+  _source: [:firstname, :balance],
+  aggs: {
+    group_by_state: {
+      terms: {
+        field: :state,
+        order: {max_balance: :desc} #default order is doc_count 
+      },
+      aggs: {
+        max_balance: {max: {field: :balance}}
+      }
+    }
+  }
+}
+```
+todo
+In each state, how much is the total of each employers' users balance, order by the total of the balance
+```
+query = {
+  query: {
+    match_all: {}
+  },
+  aggs: {
+    group_by_state: {
+      terms: {
+        field: :state
+      },
+      aggs: {
+        group_by_employer: {
+          terms: {
+            field: :employer,
+            order: {employer_total_balance: :desc}
+          },
+          aggs: {
+            employer_total_balance: {sum: {field: :balance}} 
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 

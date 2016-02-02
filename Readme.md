@@ -1,3 +1,6 @@
+# Status
+**The project is still IN MAKING. This text will be removed as soon as it is available for public.**
+
 ## What is this project for?
 This is for everyone who is comfortable with Mysql but new to Elasticsearch. Going through this, one can get a flavor of how elasticsearch queries are written. And I generally use this as a quick reference when writing elasticsearch queries.
 
@@ -208,3 +211,4 @@ query = {
   }
 }
 ```
+

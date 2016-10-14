@@ -170,6 +170,22 @@ query = {
 }
 ```
 
+
+
+#### Group By, Count + Control the number of buckets
+Total number of users available grouped by state and in their descending order. Show the first 100 entries. The default if we do not pass size parameter is 10 as was in the previous example.
+```
+query = {
+  query: {
+    match_all: {},
+  },
+  size: 0,
+  aggs: {
+    group_by_state: {terms: {field: :state, size: 100}}
+  }
+}
+```
+
 #### Nested Aggregations
 Find the total of users' balance grouped by state
 ```
